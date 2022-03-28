@@ -1,5 +1,7 @@
 # Anti-Fraud
 ## 公益-反诈骗宣传
+* 欢迎Issues
+
 * Weibo微博-国家反诈中心
 > https://weibo.com/u/7548696560
 <img src="./00.Source/W.png" style="zoom:100%;"/>
