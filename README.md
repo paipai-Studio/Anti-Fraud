@@ -1,6 +1,7 @@
 # Anti-Fraud
 ## 公益-反诈骗宣传
 * 欢迎[Issues](https://github.com/paipai-Studio/Anti-Fraud/issues)
+<img src="./00.Source/I.png" style="zoom:100%;"/>
 
 * Weibo微博-国家反诈中心
 > https://weibo.com/u/7548696560
