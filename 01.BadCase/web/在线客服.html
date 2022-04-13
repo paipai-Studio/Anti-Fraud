@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html class="pixel-ratio-2 retina"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>在线客服</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1，minimum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="./在线客服_files/layui.css">
+    <link rel="stylesheet" href="./在线客服_files/customer.css">
+    <link rel="stylesheet" href="./在线客服_files/weui.min.css">
+    <link rel="stylesheet" href="./在线客服_files/jquery-weui.min.css">
+    <link rel="stylesheet" href="./在线客服_files/iconfont.css">
+    <style>
+        .chat-message{
+            -webkit-touch-callout: all;
+            -webkit-user-select: all;
+            -moz-user-select: all;
+            -ms-user-select: all;
+            user-select: all;
+        }
+    </style>
+<link id="layuicss-layer" rel="stylesheet" href="./在线客服_files/layer.css" media="all"></head>
+<body style="background:#eee">
+<div class="chat-container" id="app" style="position:relative;top: 50px;width: 768px;height:600px;margin:0 auto;box-shadow: 0 0 3px 3px rgba(23,94,103,.15); ">
+    <div class="layui-row chat-header" style="background: #ff0000">
+        <div class="layui-col-xs1 chat-header-avatar">
+                        <img src="./在线客服_files/1.png" class="agent-avatar">
+        </div>
+        <div class="layui-col-xs10 chat-header-title">京东拍拍在线授权客服</div>
+                <div class="layui-col-xs1 chat-header-tool" id="operatorVoice">
+            <span class="iconfont" style="font-size: 20px" id="openVoice"></span>
+            <span class="iconfont" style="font-size: 20px;display: none" id="closeVoice"></span>
+        </div>
+            </div>
+    <div class="layui-row chat-body" style="width:70%">
+        <div class="chat-box">
+
+        <div class="clearfloat "><div class="author-name"><small class="chat-date">2022-03-29 15:21:28</small></div><div class="left"><div class="chat-avatars"><img src="./在线客服_files/1.png"></div><div class="chat-message check-read" data-msg-id="undefined">尊敬的VIP客户您好，京东拍拍授权客服工号：108011；很高兴为您服务！</div></div></div><div style="clear:both"></div></div>
+    </div>
+    <div class="layui-row chat-footer" style="width:70%;border-right:1px solid #eee">
+        <div class="text-holder">
+            <textarea id="textarea" placeholder="请输入内容" onblur="window.scroll(0, 0)"></textarea>
+        </div>
+        <div class="send-bar">
+            <div class="tool-box">
+                <i class="layui-icon layui-icon-face-smile" id="face"></i>
+                <i class="layui-icon layui-icon-picture" id="image"></i><input class="layui-upload-file" type="file" accept="image/*" name="file">
+                <i class="layui-icon" style="font-size: 20px;" id="file" title="文件"></i><input class="layui-upload-file" type="file" accept="" name="file">
+                <!--<i class="layui-icon layui-icon-speaker" id="voice" title="语音"></i>-->
+                <span class="staff-service" style="display: none;">转人工</span>
+            </div>
+            <div class="send-btn-div">
+                <input type="button" value="发送" class="send-input" id="sendBtn">
+                                <span class="chat-set">
+                    <i class="layui-icon layui-icon-triangle-d"></i>
+                </span>
+                <ul class="chat-set-menu">
+                    <li class="show-this" id="send-type-1">
+                        <i class="layui-icon"></i>&nbsp;&nbsp;按Enter键发送消息
+                    </li>
+                    <li id="send-type-2">
+                        <i class="layui-icon"></i>&nbsp;&nbsp;按Ctrl+Enter键发送消息
+                    </li>
+                </ul>
+                            </div>
+        </div>
+    </div>
+        <div class="layui-row" style="height: 510px;width: 230px;float: right;background: #fff;margin-top: 62px;">
+        <div class="layui-tab layui-tab-brief" style="height: 490px;overflow-y:auto">
+            <ul class="layui-tab-title">
+                <li class="layui-this">常见问题</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item info-msg layui-show">
+                                    </div>
+            </div>
+        </div>
+        <div style="height: 27px;background: #e9f0ef;margin-bottom: 0;font-size: 12px;text-align: center;line-height: 27px">
+            客服系统由 <a href="https://kefu.seth-shi.com/kefu/62402f3b087e2/62402f909e0e2#" target="_blank" style="color:#1E9FFF">在线客服</a> 提供
+        </div>
+    </div>
+    </div>
+
+<audio src="/static/voice/default.wav" style="display: none;" id="whisper-index-audio"></audio>
+
+<div id="praise_box" style="display: none;text-align: center;padding-top: 19%">
+    <p>请您对我本次服务做出评价：</p>
+    <div id="praise_star"></div>
+</div>
+
+<div style="display: none;" id="msg-box">
+    <blockquote class="layui-elem-quote">咨询前请输入以下信息</blockquote>
+    <form class="layui-form" style="padding-right: 20px;padding-top: 10px" id="pre-form">
+                <div class="layui-form-item">
+            <div class="layui-input-block">
+                <a class="layui-btn layui-btn-sm" id="sub-btn">立即提交</a>
+                <a type="reset" class="layui-btn layui-btn-sm layui-btn-primary">重置</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+
+    var socketUrl = 'wss://kefu.seth-shi.com:2020/62402f3b087e2-1648538488-6b9becdfa13a7507e17846f858538f0f';
+    var seller_id = '2';
+    var seller = '62402f3b087e2';
+    var t = '1648538488';
+    var tk = '6b9becdfa13a7507e17846f858538f0f';
+    var type = 2;
+    var port = 2020;
+    var direct_kefu = '62402f909e0e2';
+    var robot_open = 0;
+    var robot_hello = '智能客服为您服务';
+    var robot_title = '智能客服';
+    var customerId = '';
+    var cusotmerName = '';
+    var avatar = '';
+    var os = 'p';
+    var pre_see = 0;
+    var pre_input = 0;
+    var goback_url = 'https://kefu.seth-shi.com';
+    var agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36';
+</script>
+<script src="./在线客服_files/jquery.min.js"></script>
+<script src="./在线客服_files/jquery-weui.min.js"></script>
+<script src="./在线客服_files/layui.js"></script>
+<script src="./在线客服_files/reconnecting-websocket.min.js"></script>
+<script src="./在线客服_files/base.js"></script>
+<script src="./在线客服_files/customer.js"></script>
+
+</body></html>
