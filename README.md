@@ -2,7 +2,7 @@
 ## 公益-反诈骗宣传
 * 欢迎[Issues](https://github.com/paipai-Studio/Anti-Fraud/issues)/支持搜索
 
-后续这部分将作为反诈骗语料库，欢迎支持！
+后续这部分将作为“反诈骗语料库”，即将上线，欢迎支持！
 
 <img src="./00.Source/I.png" style="zoom:100%;"/>
 
